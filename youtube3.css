@@ -1,0 +1,227 @@
+/* style one */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+figure {
+    margin: 0;
+    text-align: center;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    border: 20px solid #ccc;
+    border-radius: 20px;
+}
+
+footer {
+    margin-top: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* style two */
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    background-color: #DDDDDD;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    padding: 10px;
+}
+
+/* style three */
+iframe {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.video-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px; /* Reduced grid gap for a more compact layout */
+}
+
+.video-item {
+    position: relative;
+    padding-bottom: 56.25%; /* Adjusted aspect ratio to 16:9 */
+}
+
+.video-item iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+.modal-content {
+    background-color: #FEFEFE;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.close:hover,
+.close:focus {
+    color: #000000;
+    text-decoration: none;
+    cursor: pointer;
+}
+/* css for the theme change*/
+
+/* Theme styles */
+/* Light theme */
+body.light-theme {
+    background-color: #F0F0F0;
+    color: #000000;
+}
+body.light-theme .page-header {
+    background-color: #FFFFFF;
+}
+body.light-theme .modal-content {
+    background-color: #FFFFFF;
+    color: #000000;
+}
+/* Dark theme */
+body.dark-theme {
+    background-color: #333333;
+    color: #FFFFFF;
+}
+body.dark-theme .page-header {
+    background-color: #444444;
+}
+body.dark-theme .modal-content {
+    background-color: #444444;
+    color: #FFFFFF;
+}
+body.dark-theme #themeForm input,
+body.dark-theme #themeForm select {
+    background-color: #555555;
+    color: #FFFFFF;
+    border-color: #666666;
+}
+body.dark-theme .close {
+    color: #FFFFFF;
+}
+body.dark-theme .close:hover,
+body.dark-theme .close:focus {
+    color: #CCCCCC;
+}
+/* Blue theme */
+body.blue-theme {
+    background-color: #E6F2FF;
+    color: #00366D;
+}
+body.blue-theme .page-header {
+    background-color: #F0F8FF;
+}
+body.blue-theme .modal-content {
+    background-color: #F0F8FF;
+    color: #00366D;
+}
+/* Theme selection button styles */
+#themeBtn {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#themeBtn:hover {
+    background-color: #0056B3;
+}
+/* Theme form styles */
+#themeForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+#themeForm label {
+    font-weight: bold;
+}
+#themeForm input,
+#themeForm select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #FFFFFF;
+    color: #000000;
+}
+#themeForm button {
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#themeForm button:hover {
+    background-color: #0056B3;
+}
+/* Styles for name, email, and theme inputs */
+#name, #email, #theme {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
