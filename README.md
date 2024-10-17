@@ -1,4 +1,4 @@
-< Moving any embedded or inline CSS into a separate file and linking it to the HTML page.
+Moving any embedded or inline CSS into a separate file and linking it to the HTML page.
 
 Removing any JavaScript from HTML to a separate file with a name that identifies the file's purpose.
 Adding a feature request form and button to allow users to request additional features. Styling the form and button using the linked CSS file.
