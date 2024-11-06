@@ -1,0 +1,78 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Youtube Viewer</title>
+  <link rel="stylesheet" href="youtube3.css">
+  <!-- Links to the CSS file for styling -->
+</head>
+<body>
+  <header class="page-header">
+    <!-- Header section of the page -->
+    <button id="themeBtn">Select Theme</button>
+    <!-- Button to open theme selection modal -->
+  </header>
+  
+  <div class="container1">
+    <section> 
+      <!-- First container with two YouTube video embeds -->
+      <iframe width="460" height="215" src="https://www.youtube.com/embed/Bfqeo056MwA?si=ErL3wIUaOQCUT_a_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <iframe width="460" height="315" src="https://www.youtube.com/embed/CtDlkt4Yt3o?si=glsCxM6ZlYgd7BBe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </section>
+  </div>
+  
+  <div class="container2">
+    <section> 
+      <!-- Second container with two more YouTube video embeds -->
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/W5rR91VY0b8?si=VEXNAyktkBlTgPOR" class="video-item" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/NDKh00HpFy8?si=vVEml7M0-8Xci0FA" class="video-item" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </section>
+  </div>
+
+  <div id="themeModal" class="modal">
+    <!-- Modal for theme selection -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <!-- Close button for the modal -->
+      <h2>Select Your Theme</h2>
+      <form id="themeForm">
+        <!-- Form for user preferences -->
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="theme">Theme:</label>
+        <select id="theme" name="theme">
+          <!-- Dropdown for theme selection -->
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+          <option value="blue">Blue</option>
+        </select>
+        <button type="submit">Save Preferences</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Container for profile account section -->
+    <h1>Profile Account</h1>
+    <form id="profile-form">
+      <!-- Form for creating a profile account -->
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required><br>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required><br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required><br>   
+      <label for="confirm-password">Confirm Password:</label>
+      <input type="password" id="confirm-password" name="confirm-password" required><br>   
+      <button type="submit">Create Account</button>
+    </form>   
+  </div>
+
+  <script src="youtube.js"></script>
+  <script src="profile.js"></script>
+  <!-- Links to JavaScript files for functionality -->
+</body>
+</html>
