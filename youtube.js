@@ -1,84 +1,99 @@
-  // These find the elements for the theme selection pop-up*/
-const modal = document.getElementById("themeModal");
-const btn = document.getElementById("themeBtn");
-const span = document.getElementsByClassName("close")[0];
-const form = document.getElementById("themeForm");
+// script.js
 
-/* This opens the theme selection pop-up when you click the button/icon */
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-// This closes the pop-up when you click the 'x'
-span.onclick = function() {
-  modal.style.display = "none";
-}
-// This closes the pop-up if you click outside of it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-// This handles what happens when you submit the theme form*/
-form.onsubmit = function(e) {
-  e.preventDefault();
-  const name = document.getElementById("name").value;
-  const email = document.getElementById("email").value;
-  const theme = document.getElementById("theme").value;
-  // It saves your preferences
-  localStorage.setItem("userName", name);
-  localStorage.setItem("userEmail", email);
-  localStorage.setItem("userTheme", theme);
-  // It applies the theme you chose*/
-  applyTheme(theme);
-  // It closes the pop-up*/
-  modal.style.display = "none";
-}
-// This function applies the theme you chose*/
-function applyTheme(theme) {
-  document.body.className = theme + "-theme";
-}
+document.addEventListener('DOMContentLoaded', function() {
+    const apiKey = 'AIzaSyB1J9-HJ3LrAlGmayCqNmlekmdRFxhsEZQ';
+    const mainVideoId = '6QjSwIo0fXw';
+    const categories = {
+        'Category 1': ['fh4C2FcfHpA', 'YbKsQt5aB4E', 'jhsj2mkIxbc'],
+        'Category 2': ['vb4OvBegKfY', 'nE8u0Pr3xRo']
+    };
 
-// Creating the js file for the sign-up form validation*//
+    function loadMainVideo(videoId) {
+        const iframe = document.getElementById('main-youtube-video');
+        iframe.src = `https://www.youtube.com/embed/${videoId}`;
 
-form.addEventListener('submit', (event) => {
-  event.preventDefault();
-
-  const username = document.getElementById('username').value;
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
-  const confirmPassword = document.getElementById('confirm-password').value;
-
-  // Validate input
-  if (password !== confirmPassword) {
-    alert('Passwords do not match.');
-    return;
-  }
-
-  // TODO: Implement additional validation as needed (e.g., check for existing username, password strength)Z*/
-
-  // Send data to server for processing*//
-  fetch('/create-account', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      username,
-      email,
-      password
-    })
-  })
-  .then(response => response.json())
-  .then(data => {
-    if (data.success) {
-      // Handle successful account creation (e.g., redirect to login page)
-      alert('Account created successfully!');
-    } else {
-      alert('Error creating account: ' + data.error);
+        fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&id=${videoId}&key=${apiKey}`)
+            .then(response => response.json())
+            .then(data => {
+                const videoInfo = data.items[0].snippet;
+                const contentDetails = data.items[0].contentDetails;
+                document.getElementById('main-video-title').textContent = videoInfo.title;
+                document.getElementById('main-video-description').textContent = videoInfo.description;
+                document.getElementById('main-video-watch-time').textContent = `Duration: ${formatDuration(contentDetails.duration)}`;
+            })
+            .catch(error => {
+                console.error('Error fetching video information:', error);
+                document.getElementById('main-video-title').textContent = 'Video information unavailable';
+                document.getElementById('main-video-description').textContent = 'Unable to load video description.';
+                document.getElementById('main-video-watch-time').textContent = '';
+            });
     }
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    alert('An error occurred. Please try again later.');
-  });
+
+    function loadRelatedVideos(videoIds) {
+        const container = document.getElementById('video-list-container');
+        container.innerHTML = '';
+
+        videoIds.forEach(videoId => {
+            fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&id=${videoId}&key=${apiKey}`)
+                .then(response => response.json())
+                .then(data => {
+                    const videoInfo = data.items[0].snippet;
+                    const contentDetails = data.items[0].contentDetails;
+                    const videoElement = createVideoElement(videoId, videoInfo, contentDetails);
+                    container.appendChild(videoElement);
+                })
+                .catch(error => console.error('Error fetching related video information:', error));
+        });
+    }
+
+    function createVideoElement(videoId, videoInfo, contentDetails) {
+        const videoElement = document.createElement('div');
+        videoElement.className = 'video-list-item';
+        videoElement.innerHTML = `
+            <img src="${videoInfo.thumbnails.medium.url}" alt="${videoInfo.title}">
+            <div class="video-list-item-info">
+                <h4>${videoInfo.title}</h4>
+                <p>Duration: ${formatDuration(contentDetails.duration)}</p>
+            </div>
+        `;
+        videoElement.addEventListener('click', () => loadMainVideo(videoId));
+        return videoElement;
+    }
+
+    function formatDuration(duration) {
+        const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
+        const hours = (parseInt(match[1]) || 0);
+        const minutes = (parseInt(match[2]) || 0);
+        const seconds = (parseInt(match[3]) || 0);
+        return `${hours ? hours + ':' : ''}${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    function createCategoryButtons() {
+        const buttonContainer = document.createElement('div');
+        buttonContainer.className = 'category-buttons';
+        Object.keys(categories).forEach(category => {
+            const button = document.createElement('button');
+            button.textContent = category;
+            button.addEventListener('click', () => loadRelatedVideos(categories[category]));
+            buttonContainer.appendChild(button);
+        });
+        document.querySelector('.video-list').insertBefore(buttonContainer, document.getElementById('video-list-container'));
+    }
+
+    // Theme toggle functionality
+    window.toggleTheme = function() {
+        const body = document.body;
+        const currentTheme = body.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        body.setAttribute('data-theme', newTheme);
+
+        const themeToggleButton = document.getElementById('theme-toggle-button');
+        themeToggleButton.textContent = newTheme === 'dark' ? '🌙' : '🌞';
+        themeToggleButton.setAttribute('title', `Switch to ${currentTheme} theme`);
+    }
+
+    // Initial load
+    loadMainVideo(mainVideoId);
+    createCategoryButtons();
+    loadRelatedVideos(categories['Category 1']); // Load the first category by default
 });

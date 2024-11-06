@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced YouTube Video Viewer with Themes</title>
+    <link rel="stylesheet" href="youtube.css">
+</head>
+<body data-theme="light">
+    <header>
+        <h1>Enhanced YouTube Video Viewer</h1>
+        <button id="theme-toggle-button" onclick="toggleTheme()" title="Toggle theme">🌞</button>
+    </header>
+    <main class="grid-container">
+        <section class="main-video">
+            <div class="video-container">
+                <iframe id="main-youtube-video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="video-info">
+                <h2 id="main-video-title"></h2>
+                <p id="main-video-description"></p>
+                <p id="main-video-watch-time"></p>
+            </div>
+        </section>
+        <section class="video-list">
+            <h3>Watch Next</h3>
+            <div id="video-list-container"></div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Enhanced YouTube Video Viewer</p>
+    </footer>
+    <script src="youtube.js"></script>
+</body>
+</html>
