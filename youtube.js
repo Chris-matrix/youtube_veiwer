@@ -1,4 +1,4 @@
-// script.js
+// Combined script.js
 
 document.addEventListener('DOMContentLoaded', function() {
     const apiKey = 'AIzaSyB1J9-HJ3LrAlGmayCqNmlekmdRFxhsEZQ';
@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
         'Category 2': ['vb4OvBegKfY', 'nE8u0Pr3xRo']
     };
 
+    // YouTube Video Viewer Functions
     function loadMainVideo(videoId) {
         const iframe = document.getElementById('main-youtube-video');
         iframe.src = `https://www.youtube.com/embed/${videoId}`;
@@ -80,20 +81,87 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelector('.video-list').insertBefore(buttonContainer, document.getElementById('video-list-container'));
     }
 
+    // Profile Functions
+    function loadProfile() {
+        const username = localStorage.getItem('username');
+        const email = localStorage.getItem('email');
+        const theme = localStorage.getItem('theme');
+        
+        if (username && email) {
+            document.getElementById('displayUsername').textContent = username;
+            document.getElementById('displayEmail').textContent = email;
+            document.getElementById('displayTheme').textContent = theme || 'light';
+            
+            // Pre-fill the form
+            document.getElementById('username').value = username;
+            document.getElementById('email').value = email;
+            document.querySelector(`input[name="theme"][value="${theme || 'light'}"]`).checked = true;
+        }
+    }
+
+    function saveProfile(event) {
+        event.preventDefault();
+        
+        const username = document.getElementById('username').value;
+        const email = document.getElementById('email').value;
+        const theme = document.querySelector('input[name="theme"]:checked').value;
+        
+        if (username.length < 4) {
+            alert('Username must be at least 4 characters long');
+            return;
+        }
+        
+        localStorage.setItem('username', username);
+        localStorage.setItem('email', email);
+        localStorage.setItem('theme', theme);
+        
+        loadProfile();
+        applyTheme(theme);
+        alert('Profile updated successfully!');
+    }
+
+    function applyTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+        const themeToggleButton = document.getElementById('theme-toggle-button');
+        themeToggleButton.textContent = theme === 'dark' ? '🌙' : '🌞';
+        themeToggleButton.setAttribute('title', `Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`);
+    }
+
     // Theme toggle functionality
     window.toggleTheme = function() {
-        const body = document.body;
-        const currentTheme = body.getAttribute('data-theme');
+        const currentTheme = document.body.getAttribute('data-theme');
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        body.setAttribute('data-theme', newTheme);
+        applyTheme(newTheme);
+        localStorage.setItem('theme', newTheme);
+    }
 
-        const themeToggleButton = document.getElementById('theme-toggle-button');
-        themeToggleButton.textContent = newTheme === 'dark' ? '🌙' : '🌞';
-        themeToggleButton.setAttribute('title', `Switch to ${currentTheme} theme`);
+    // Navigation Functions
+    function showHome() {
+        document.getElementById('home').style.display = 'block';
+        document.getElementById('profile').style.display = 'none';
+    }
+
+    function showProfile() {
+        document.getElementById('home').style.display = 'none';
+        document.getElementById('profile').style.display = 'block';
+        loadProfile(); // Reload profile data when showing the profile
     }
 
     // Initial load
     loadMainVideo(mainVideoId);
     createCategoryButtons();
     loadRelatedVideos(categories['Category 1']); // Load the first category by default
+    applyTheme(localStorage.getItem('theme') || 'light');
+    showHome(); // Start on the home page
+
+    // Event Listeners
+    document.getElementById('profileForm').addEventListener('submit', saveProfile);
+    document.getElementById('homeLink').addEventListener('click', function(e) {
+        e.preventDefault();
+        showHome();
+    });
+    document.getElementById('profileLink').addEventListener('click', function(e) {
+        e.preventDefault();
+        showProfile();
+    });
 });

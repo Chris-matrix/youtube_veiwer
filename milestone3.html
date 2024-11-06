@@ -3,33 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enhanced YouTube Video Viewer with Themes</title>
+    <title>Enhanced YouTube Video Viewer with Profile</title>
     <link rel="stylesheet" href="youtube.css">
 </head>
 <body data-theme="light">
     <header>
         <h1>Enhanced YouTube Video Viewer</h1>
+        <nav>
+            <ul>
+                <li><a href="#" id="homeLink">Home</a></li>
+                <li><a href="#" id="profileLink">Profile</a></li>
+            </ul>
+        </nav>
         <button id="theme-toggle-button" onclick="toggleTheme()" title="Toggle theme">🌞</button>
     </header>
+
     <main class="grid-container">
-        <section class="main-video">
-            <div class="video-container">
-                <iframe id="main-youtube-video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <section id="home">
+            <div class="main-video">
+                <div class="video-container">
+                    <iframe id="main-youtube-video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h2 id="main-video-title"></h2>
+                    <p id="main-video-description"></p>
+                    <p id="main-video-watch-time"></p>
+                </div>
             </div>
-            <div class="video-info">
-                <h2 id="main-video-title"></h2>
-                <p id="main-video-description"></p>
-                <p id="main-video-watch-time"></p>
-            </div>
+            <section class="video-list">
+                <h3>Watch Next</h3>
+                <div id="video-list-container"></div>
+            </section>
         </section>
-        <section class="video-list">
-            <h3>Watch Next</h3>
-            <div id="video-list-container"></div>
+
+        <section id="profile" class="profile-section" style="display: none;">
+            <h2>User Profile</h2>
+            <form id="profileForm">
+                <div>
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required minlength="4">
+                </div>
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div>
+                    <p>Theme Preference:</p>
+                    <input type="radio" id="light" name="theme" value="light" checked>
+                    <label for="light">Light</label>
+                    <input type="radio" id="dark" name="theme" value="dark">
+                    <label for="dark">Dark</label>
+                    <input type="radio" id="blue" name="theme" value="blue">
+                    <label for="blue">Blue</label>
+                    <input type="radio" id="green" name="theme" value="green">
+                    <label for="green">Green</label>
+                </div>
+                <button type="submit">Update Profile</button>
+            </form>
+            <div id="profileDisplay">
+                <h3>Current Profile</h3>
+                <p>Username: <span id="displayUsername"></span></p>
+                <p>Email: <span id="displayEmail"></span></p>
+                <p>Theme: <span id="displayTheme"></span></p>
+            </div>
         </section>
     </main>
+
     <footer>
         <p>&copy; 2024 Enhanced YouTube Video Viewer</p>
     </footer>
+
     <script src="youtube.js"></script>
 </body>
 </html>

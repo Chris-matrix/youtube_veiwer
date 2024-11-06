@@ -6,6 +6,10 @@
     --header-text: #ffffff;
     --card-bg: #ffffff;
     --card-shadow: rgba(0, 0, 0, 0.15);
+    --input-bg: #f0f0f0;
+    --input-border: #cccccc;
+    --button-bg: #007BFF;
+    --button-text: #ffffff;
 }
 
 /* Dark theme */
@@ -16,6 +20,38 @@
     --header-text: #ffffff;
     --card-bg: #212529;
     --card-shadow: rgba(255, 255, 255, 0.1);
+    --input-bg: #2c3034;
+    --input-border: #495057;
+    --button-bg: #0056b3;
+    --button-text: #ffffff;
+}
+
+/* Blue theme */
+[data-theme="blue"] {
+    --bg-color: #e6f2ff;
+    --text-color: #000033;
+    --header-bg: #4a90e2;
+    --header-text: #ffffff;
+    --card-bg: #ffffff;
+    --card-shadow: rgba(0, 0, 51, 0.1);
+    --input-bg: #d1e5ff;
+    --input-border: #4a90e2;
+    --button-bg: #4a90e2;
+    --button-text: #ffffff;
+}
+
+/* Green theme */
+[data-theme="green"] {
+    --bg-color: #e6ffe6;
+    --text-color: #003300;
+    --header-bg: #4caf50;
+    --header-text: #ffffff;
+    --card-bg: #ffffff;
+    --card-shadow: rgba(0, 51, 0, 0.1);
+    --input-bg: #d1ffd1;
+    --input-border: #4caf50;
+    --button-bg: #4caf50;
+    --button-text: #ffffff;
 }
 
 body {
@@ -39,6 +75,21 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: var(--header-text);
+    text-decoration: none;
 }
 
 #theme-toggle-button {
@@ -86,7 +137,7 @@ header {
     height: 100%;
 }
 
-.video-info {
+.video-info, .profile-section {
     margin-top: 1rem;
     background-color: var(--card-bg);
     padding: 1rem;
@@ -144,12 +195,57 @@ h1, h2, h3, h4 {
     color: var(--bg-color);
 }
 
+/* Profile styles */
+.profile-section {
+    grid-column: 1 / -1;
+}
+
+#profileForm {
+    display: grid;
+    gap: 1rem;
+}
+
+#profileForm label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+#profileForm input[type="text"],
+#profileForm input[type="email"],
+#profileForm input[type="password"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--input-border);
+    border-radius: 4px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+}
+
+#profileForm button {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#profileForm button:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+}
+
+#profileDisplay {
+    margin-top: 2rem;
+}
+
 @media (max-width: 768px) {
     .grid-container {
         grid-template-columns: 1fr;
     }
 
-    .main-video, .video-list {
+    .main-video, .video-list, .profile-section {
         grid-column: 1 / 2;
     }
 }
