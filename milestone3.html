@@ -1,56 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta tags for character encoding and responsive design -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enhanced YouTube Video Viewer with Profile</title>
+    <!-- Link to external CSS file -->
     <link rel="stylesheet" href="youtube.css">
 </head>
 <body data-theme="light">
+    <!-- Header section -->
     <header>
         <h1>Enhanced YouTube Video Viewer</h1>
+        <!-- Navigation menu -->
         <nav>
             <ul>
                 <li><a href="#" id="homeLink">Home</a></li>
                 <li><a href="#" id="profileLink">Profile</a></li>
             </ul>
         </nav>
+        <!-- Theme toggle button -->
         <button id="theme-toggle-button" onclick="toggleTheme()" title="Toggle theme">🌞</button>
     </header>
 
+    <!-- Main content area -->
     <main class="grid-container">
+        <!-- Home section -->
         <section id="home">
+            <!-- Main video display area -->
             <div class="main-video">
                 <div class="video-container">
+                    <!-- YouTube video iframe -->
                     <iframe id="main-youtube-video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
+                <!-- Video information display -->
                 <div class="video-info">
                     <h2 id="main-video-title"></h2>
                     <p id="main-video-description"></p>
                     <p id="main-video-watch-time"></p>
                 </div>
             </div>
+            <!-- Video list section -->
             <section class="video-list">
                 <h3>Watch Next</h3>
                 <div id="video-list-container"></div>
             </section>
         </section>
 
+        <!-- Profile section (initially hidden) -->
         <section id="profile" class="profile-section" style="display: none;">
             <h2>User Profile</h2>
+            <!-- Profile form -->
             <form id="profileForm">
+                <!-- Username input -->
                 <div>
                     <label for="username">Username:</label>
                     <input type="text" id="username" name="username" required minlength="4">
                 </div>
+                <!-- Email input -->
                 <div>
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" required>
                 </div>
+                <!-- Password input -->
                 <div>
                     <label for="password">Password:</label>
                     <input type="password" id="password" name="password" required>
                 </div>
+                <!-- Theme preference radio buttons -->
                 <div>
                     <p>Theme Preference:</p>
                     <input type="radio" id="light" name="theme" value="light" checked>
@@ -62,8 +79,10 @@
                     <input type="radio" id="green" name="theme" value="green">
                     <label for="green">Green</label>
                 </div>
+                <!-- Submit button -->
                 <button type="submit">Update Profile</button>
             </form>
+            <!-- Profile display area -->
             <div id="profileDisplay">
                 <h3>Current Profile</h3>
                 <p>Username: <span id="displayUsername"></span></p>
@@ -73,10 +92,12 @@
         </section>
     </main>
 
+    <!-- Footer section -->
     <footer>
         <p>&copy; 2024 Enhanced YouTube Video Viewer</p>
     </footer>
 
+    <!-- Link to external JavaScript file -->
     <script src="youtube.js"></script>
 </body>
 </html>
